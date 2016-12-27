@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "build": "browserify -t [yo-yoify] index.js > bundle.js"
+  },
+  "devDependencies": {
+    "dom-css": "^2.1.0"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "text": "",
+  "todos": [],
+  "filter": {
+    "focus": 0,
+    "values": ["All", "Active", "Completed"]
+  }
+}
