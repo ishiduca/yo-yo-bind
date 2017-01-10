@@ -26,7 +26,7 @@ const create = (state, dispatch) => app.html `
 const reduce = (state, action, type) => {
   if (type === 'FETCH') {
     return dispatch => {
-      fetch(action).then(res => res.json()).then(res => dispatch('UPDATED', res.src)
+      fetch(action).then(res => res.json()).then(res => dispatch('UPDATED', res.src))
     }
   } else if (type === 'UPDATED') {
     return action
