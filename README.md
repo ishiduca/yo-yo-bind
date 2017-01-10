@@ -1,6 +1,6 @@
 # yo-yo-bind
 
-[yo-yo-app](https://www.npmjs.com/package/yo-yo-app) is good. but, it is hard to use it with lazy handling. in such a case throw Promise.
+[yo-yo-app](https://www.npmjs.com/package/yo-yo-app) is good. but, it is hard to use it with lazy handling. in such a case use middleware.
 
 ## example
 
@@ -62,6 +62,7 @@ const crate = (state, dispatch) => {
 #### reduce
 
 `reduce` is a function. take 3 arguments(`state`, `action`, `type`). returns `new state` or `Promise object`.
+`reduce` is a function. take 3 arguments(`state`, `action`, `type`). returns `new state` or `middleware`.
 
 ```js
 const xtend = require('xtend')
@@ -79,9 +80,12 @@ async
 const xtend = require('xtend')
 const reduce = (state, action, type) => {
   if (type === 'UPDATE') {
-    return new Promise(resolve => {
-      setTimeout(() => resolve(xtend(state, {count: action})), 1000)
-    })
+    return function middleware (dispatch) {
+      setTimeout(() => dispatch('UPDATED', action), 1000)
+    }
+  }
+  if (type === 'UPDATED') {
+    return xtend(state, {count: action})
   }
   return state
 }
