@@ -23,8 +23,16 @@ const create = (state, dispatch) => app.html `
     </main>
 `
 
-const reduce = (state, action) => fetch(action).then(res => res.json()).then(res => res.src)
-
+const reduce = (state, action, type) => {
+  if (type === 'FETCH') {
+    return dispatch => {
+      fetch(action).then(res => res.json()).then(res => dispatch('UPDATED', res.src)
+    }
+  } else if (type === 'UPDATED') {
+    return action
+  }
+  return state
+}
 d.body.appendChild(app(create, null, reduce))
 ```
 
