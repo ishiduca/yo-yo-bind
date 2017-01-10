@@ -1,20 +1,21 @@
-var yo  = require('yo-yo')
+var yo = require('yo-yo')
 var isPromise = require('is-promise')
 
-module.exports = function bind_app (create, state, reduce) {
-    var dom = create(state, dispatch)
-    return dom
-
-    function dispatch (state, action) {
-        var whats = reduce(state, action)
-        if (isPromise(whats))
-             whats.then(function (state) {update(state, dispatch)})
-        else update(whats, dispatch)
-    }
-
-    function update (state, dispatch) {
+module.exports = function bindApp (create, state, reduce) {
+  var dom = create(state, dispatch)
+  return dom
+  function dispatch (type, action) {
+    var whatIsThis = reduce(state, action, type)
+    if (isPromise(whatIsThis)) {
+      whatIsThis.then(function (_state){
+        state = _state
         yo.update(dom, create(state, dispatch))
+      })
+    } else {
+      state = whatIsThis
+      yo.update(dom, create(state, dispatch))
     }
+  }
 }
 
 module.exports.html = yo
