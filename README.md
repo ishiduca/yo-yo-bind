@@ -61,7 +61,7 @@ const crate = (state, dispatch) => {
 
 #### reduce
 
-`reduce` is a function. take 3 arguments(`state`, `action`. `type`). returns `new state` or `Promise object`.
+`reduce` is a function. take 3 arguments(`state`, `action`, `type`). returns `new state` or `Promise object`.
 
 ```js
 const xtend = require('xtend')
@@ -91,6 +91,3 @@ const reduce = (state, action, type) => {
 * `action`
 * `type`
 
-
-* `state`
-* `action`
